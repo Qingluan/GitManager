@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CONTAINERS_ID=$(docker ps -a | grep sameersbn );
+
+function save_images {
+	docker commit $(docker ps -a | grep sameersbn | grep $1 | awk '{ print $1}'| xargs) $1.bak;  
+}
+
+save_images redis;
+save_images gitlab:8.14.4;
+save_images postgresql;
