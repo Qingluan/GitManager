@@ -1,0 +1,10 @@
+setup.py
+gire/__init__.py
+gire/create.py
+gire.egg-info/PKG-INFO
+gire.egg-info/SOURCES.txt
+gire.egg-info/dependency_links.txt
+gire.egg-info/entry_points.txt
+gire.egg-info/not-zip-safe
+gire.egg-info/requires.txt
+gire.egg-info/top_level.txt

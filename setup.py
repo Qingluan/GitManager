@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='gire',
-    version='1.2',
+    version='1.3',
     description='a tool to manage remote git server\'s projects ',
     url='https://github.com/Qingluan/.git',
     author='Qing luan',
@@ -12,7 +12,7 @@ setup(name='gire',
     license='MIT',
     zip_safe=False,
     packages=find_packages(),
-    install_requires=['hackcmds==5.1','mroylib-min==1.0'],
+    install_requires=['hackcmds==5.2','mroylib-min==1.0'],
     entry_points={
         'console_scripts': ['gIre=gire.create:main']
     },
