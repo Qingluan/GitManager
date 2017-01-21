@@ -48,7 +48,7 @@ def create(name, project_web):
             return i.strip().split().pop()
 
 def synchronization(dir, origin_name, uri=None):
-    L.ok("add origin ", origin_name,uri)
+    L.ok("info:", origin_name,uri)
     if uri != None:
         cmd = "cd " +dir+ " && git init ; git remote add " + origin_name+ " " + uri
         code, info = subprocess.getstatusoutput(cmd)
