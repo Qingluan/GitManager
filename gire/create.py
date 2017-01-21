@@ -67,8 +67,10 @@ def synchronization(dir, origin_name, uri=None):
     if code != 0:
         L.err(info)
         return 
-
-    L.ok("create " + dir)
+    if uri != None:
+        L.ok("create " + dir)
+    else:
+        L.ok("Sync " + dir)
     return True
 
 
