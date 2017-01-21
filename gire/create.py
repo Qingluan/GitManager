@@ -31,6 +31,7 @@ def args():
     parser.add_argument("-p", "--passwd", default=None, help='git user\'s  password.')
     parser.add_argument("-S", "--Sync", default=False,action='store_true', help='set origin\' name. default is "origin"')
     parser.add_argument("-o", "--origin-name", default="origin", help='set origin\' name. default is "origin"')
+    parser.add_argument("-ou", "--origin-url", default=None, help='set origin\' url name.')
     return parser.parse_args()
 
 
@@ -82,8 +83,11 @@ def main():
         if ag.Sync:
             synchronization(ag.create_project, ag.origin_name)
         elif os.path.isdir(ag.create_project):
-            remote_uri = create(ag.create_project.split("/").pop(), project_web)
-            synchronization(ag.create_project, ag.origin_name, remote_uri)
+            if ag.origin_url:
+                synchronization(ag.create_project, ag.origin_name, ag.origin_url)
+            else:
+                remote_uri = create(ag.create_project.split("/").pop(), project_web)
+                synchronization(ag.create_project, ag.origin_name, remote_uri)
         else:
             L.err("no such project dir.", ag.create_project)
 
