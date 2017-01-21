@@ -29,6 +29,7 @@ def args():
     parser.add_argument("-l", "--create-project-link", default="/projects/new", help='create project.')
     parser.add_argument("-u", "--user", default=None, help='git user\'s  username.')
     parser.add_argument("-p", "--passwd", default=None, help='git user\'s  password.')
+    parser.add_argument("-S", "--Sync", default=False,action='store_true', help='set origin\' name. default is "origin"')
     parser.add_argument("-o", "--origin-name", default="origin", help='set origin\' name. default is "origin"')
     return parser.parse_args()
 
@@ -45,13 +46,14 @@ def create(name, project_web):
         if i.startswith("git") and "remote add" in i:
             return i.strip().split().pop()
 
-def synchronization(dir, origin_name, uri):
+def synchronization(dir, origin_name, uri=None):
     L.info("add origin ", origin_name,uri)
-    cmd = "cd " +dir+ " && git init ; git remote add " + origin_name+ " " + uri
-    code, info = subprocess.getstatusoutput(cmd)
-    if code != 0:
-        L.err(info)
-        L.info("add origin ", origin_name,uri)
+    if uri != None:
+        cmd = "cd " +dir+ " && git init ; git remote add " + origin_name+ " " + uri
+        code, info = subprocess.getstatusoutput(cmd)
+        if code != 0:
+            L.err(info)
+            L.info("add origin ", origin_name,uri)
 
         
     cmd = "cd " +dir+ " && git add -A && git commit -m 'synchronization' "
@@ -75,7 +77,9 @@ def main():
     user = json.loads(user_data % (ag.user, ag.passwd))
     project_web = init(ag.git_host, ag.create_project_link, user_data=user)
     if ag.create_project:
-        if os.path.isdir(ag.create_project):
+        if ag.Sync:
+            synchronization(ag.create_project, ag.origin_name)
+        elif os.path.isdir(ag.create_project):
             remote_uri = create(ag.create_project.split("/").pop(), project_web)
             synchronization(ag.create_project, ag.origin_name, remote_uri)
         else:

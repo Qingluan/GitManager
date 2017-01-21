@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='gire',
-    version='1.0',
+    version='1.1',
     description='a tool to manage remote git server\'s projects ',
     url='https://github.com/Qingluan/.git',
     author='Qing luan',
