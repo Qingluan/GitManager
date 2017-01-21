@@ -61,7 +61,6 @@ def synchronization(dir, origin_name, uri=None):
     code, info = subprocess.getstatusoutput(cmd)
     if code != 0:
         L.err(info)
-        return
     
     cmd = "cd " +dir+ " && git push " + origin_name + " master -u"
     code, info = subprocess.getstatusoutput(cmd)
